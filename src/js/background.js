@@ -4,6 +4,10 @@ import axios from 'axios'
 import urls from './urls'
 import actions from "./actions"
 
+import "../img/flatter.icon128.png"
+import "../img/flatter.icon48.png"
+import "../img/flatter.icon16.png"
+
 console.log("This is the background script! Waddup!")
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) =>{

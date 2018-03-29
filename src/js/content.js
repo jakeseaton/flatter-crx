@@ -2,10 +2,27 @@ import actions from "./actions"
 import axios from 'axios'
 import $ from 'jquery'
 
+import "../img/paul.blue.jpg"
+import "../img/paul.green.png"
+import "../img/paul.purple.png"
+import "../img/paul.yellow.png"
+
 console.log("this is the content script, herr asdfasdf o!")
 
-const profilePictureUrl = "https://scontent.fzty2-1.fna.fbcdn.net/v/t31.0-8/24059483_10212934947067195_686594785522664926_o.jpg?_nc_cat=0&oh=1f7e3e28cf4a4bf36946224311056a17&oe=5B3EB965"
+// const profilePictureUrl = "https://scontent.fzty2-1.fna.fbcdn.net/v/t31.0-8/24059483_10212934947067195_686594785522664926_o.jpg?_nc_cat=0&oh=1f7e3e28cf4a4bf36946224311056a17&oe=5B3EB965"
 // const profilePictureUrl = "https://scontent.fzty2-1.fna.fbcdn.net/v/t31.0-8/22713467_10212853769512353_443941326985392112_o.jpg?_nc_cat=0&oh=f41d18f0cd7837ca2f4fe6ca2896ea4a&oe=5B6E2CF0"
+// const profilePictureUrl = "https://scontent.fzty2-1.fna.fbcdn.net/v/t1.0-9/11692607_1625821830997727_6154666202623863482_n.jpg?_nc_cat=0&oh=8a9a3b1d5178a295937616d715084f59&oe=5B334D54"
+
+const images = [
+    "paul.blue.jpg",
+    "paul.green.png",
+    "paul.purple.png",
+    "paul.yellow.png"
+]
+
+images.map(img => console.log(chrome.extension.getURL(img)))
+
+const profilePictureUrl = "https://www.seas.harvard.edu/sites/default/files/styles/directory_large/public/images/Directory/pbottino_200x300.jpg?itok=zoBzqpl3"
 chrome.runtime.sendMessage({action: actions.QUERY_SHOULD_RUN}, ({ shouldRun }) => {
     if (shouldRun){
         const imageUrls = []
@@ -13,7 +30,12 @@ chrome.runtime.sendMessage({action: actions.QUERY_SHOULD_RUN}, ({ shouldRun }) =
         $("img.product-listing-image").map((idx, img) => {
             const src = $(img).attr("src")
             imageUrls.push(src)
-            $(img).attr("src", profilePictureUrl)
+
+            const nextImageUrl = chrome.extension.getURL(images[idx % images.length])
+
+            console.log("Setting url to be", nextImageUrl)
+            // $(img).attr("src", chrome.extension.getURL(images[idx % images.length]))
+            $(img).attr("src", nextImageUrl)
         })
         }
 });

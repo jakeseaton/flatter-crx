@@ -16,7 +16,9 @@
     }
   ],
   "icons": {
-    "128": "icon-128.png"
+    "128": "flatter.icon128.png",
+    "16": "flatter.icon16.png",
+    "48": "flatter.icon48.png"
   },
   "manifest_version": 2,
   "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
@@ -24,5 +26,11 @@
     "storage",
     "tabs",
     "activeTab"
+  ],
+  "web_accessible_resources":[
+    "paul.blue.jpg",
+    "paul.green.png",
+    "paul.purple.png",
+    "paul.yellow.png"
   ]
 }
